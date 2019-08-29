@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   # URL 'welcome/home';
   # route to 'welcome' controller;
   # 'home' action;
-  get 'welcome/home', to: 'welcome#home'
-  get 'welcome/about', to: 'welcome#about'
+  root 'pages#home'
+  get 'about', to: 'pages#about'
+
+  # V1
+  # get 'welcome/home', to: 'welcome#home'
+  # get 'welcome/about', to: 'welcome#about'
 end
