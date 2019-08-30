@@ -5,6 +5,6 @@
 # THEN ew could save to db object with all nil values
 class Article < ApplicationRecord
   # Will not save data if title is "nil"
-  validates :title, presense: true, length: { minimum: 3, maximum: 50 }
-  validates :description, presense: true, length: { minimum: 10, maximum: 300 }
+  validates :title, presence: true, length: { minimum: 3, maximum: 50 }
+  validates :description, presence: true, length: { minimum: 10, maximum: 30 }
 end
