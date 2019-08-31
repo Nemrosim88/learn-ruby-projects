@@ -1,6 +1,6 @@
-# README
+**Table of Contents**
 
-# Step 1 link [Heading link](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/README.md "Step 1")
+[TOC]
 
 ### Requirements
 installed posgresql
