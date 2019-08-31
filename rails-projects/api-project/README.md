@@ -11,7 +11,7 @@ https://www.postgresql.org/download/
 
 ### Step 2
 `$ rails (generate/g) model contact`
-> It will generae contact.rb in app/models folder and migration file in db/migrate folder
+> It will generate "contact.rb" in app/models folder and migration file in db/migrate folder
 ![](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/read-me-images/2019-08-31_14-04-30.jpg)
 
 ### Step 3
@@ -53,5 +53,24 @@ development:
 
 ### Step 7
 `$ rails db.migrate`
-> It will generae contact.rb in app/models folder and migration file in db/migrate folder
-![](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/read-me-images/2019-08-31_14-04-30.jpg)
+> It will cretae "contacts" table in "api_project_development" database
+![](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/read-me-images/ps-created-db.jpg)
+
+> And will change "db/schema.rb" file:
+
+```ruby
+ActiveRecord::Schema.define(version: 2019_08_31_104724) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+end
+```
