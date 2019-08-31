@@ -32,15 +32,15 @@ end
 ```
 ![](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/read-me-images/2019-08-31_14-20-14.jpg)
 
-### Step 5
+### Step 4
 > If there is not installed and started postgresql servers - install and start it
 
-### Step 6
+### Step 5
 > In pgAdmin create new database - api_project_development
 ![](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/read-me-images/ps-bd-create.jpg)
-![](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/read-me-images/ps-db-create-savejpg)
+![](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/read-me-images/ps-db-create-save.jpg)
 
-### Step 7
+### Step 6
 > Add username and password to "database.yml" file in /config folder
 
 ```ruby
@@ -51,7 +51,7 @@ development:
   password: admin
 ```
 
-### Step 8
+### Step 7
 `$ rails db.migrate`
 > It will generae contact.rb in app/models folder and migration file in db/migrate folder
 ![](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/read-me-images/2019-08-31_14-04-30.jpg)
