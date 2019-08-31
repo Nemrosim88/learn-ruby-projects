@@ -193,14 +193,3 @@ module ApiProject
     end
 ```
 
-### Step 16 Add gem 'devise'
-> https://github.com/plataformatec/devise#getting-started
-
-`$ bundle install`
-`$ rails generate devise:install`
-`$ rails generate devise user`
-
-> Uncomment "## Confirmable, ## Lockable and ## Trackable" in db/migrate/devise migration file
-
-`$ rails db:migrate`
-
