@@ -53,7 +53,7 @@ development:
 
 ### Step 7
 `$ rails db.migrate`
-> It will cretae "contacts" table in "api_project_development" database
+> It will create "contacts" table in "api_project_development" database
 ![](https://github.com/Nemrosim88/learn-ruby-projects/raw/master/rails-projects/api-project/read-me-images/ps-created-db.jpg)
 
 > And will change "db/schema.rb" file:
@@ -74,3 +74,66 @@ ActiveRecord::Schema.define(version: 2019_08_31_104724) do
 
 end
 ```
+
+### Step 8
+`$ rails g controller v1/contacts`
+> It will generate "app/controllers/v1/contacts_controller.rb" file with V1::ContactsController class in it.
+
+```ruby
+class V1::ContactsController < ApplicationController
+end
+```
+
+### Step 9
+> Add index method to contacts controller.
+
+```ruby
+class V1::ContactsController < ApplicationController
+  def index
+    @contacts = Contact.all
+    
+    # It will return "contacts" in json format
+    render json: @contacts, status: :ok
+    # OR same line
+    # render json: { data: @contacts, status: 200 }
+  end
+end
+```
+
+### Step 10
+> Add lines config/routes.rb:
+
+```ruby
+Rails.application.routes.draw do
+  # This means that our endpoints will start from /v1/...
+  # Example: http://localhost:3000/v1/contacts
+  namespace :v1 do
+    resources :contacts
+  end
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+end
+```
+
+### Step 11
+`$ rails routes | grep contacts`
+> Will show routes (end-points) to contacts. Example:
+
+ v1_contacts
+ 
+    | method            route                               controller#method
+    | GET         /v1/contacts(.:format)                 v1/contacts#index
+    | POST       /v1/contacts(.:format)                 v1/contacts#create
+    | GET         /v1/contacts/:id(.:format)            v1/contacts#show
+    | PATCH    /v1/contacts/:id(.:format)            v1/contacts#update
+    | PUT         /v1/contacts/:id(.:format)            v1/contacts#update
+    | DELETE    /v1/contacts/:id(.:format)            v1/contacts#destroy
+
+    
+### Step 12
+`$ rails server`
+or
+`$ rails s`
+> Will start the rails application
+
+### Step 13
+> If you type in browser url http://localhost:3000/v1/contacts, you show see an empty array [] if everything works properly.
