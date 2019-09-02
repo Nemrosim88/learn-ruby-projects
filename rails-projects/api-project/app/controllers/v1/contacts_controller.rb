@@ -12,28 +12,45 @@ class V1::ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-
     if @contact.save
       render json: @contact, status: :created
     else
       render json: @contact.errors, status: :bad_request
-
     end
+  end
+
+  def show
+    @contact = Contact.find(params[:id])
+    render json: @contact, status: :ok
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { error: e }, status: :not_found
+  end
+
+  def update
+    @contact = Contact.find(params[:id])
+    if @contact.update(contact_params)
+      render status: :ok
+    else
+      render json: @contact.errors, status: :bad_request
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { error: e }, status: :not_found
   end
 
   def destroy
     @contact = Contact.find(params[:id])
     if @contact.destroy
-      head(:ok)
+      render status: :ok
     else
-      head(:unprocessable_entity)
+      render status: :bad_request
     end
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { error: e }, status: :not_found
   end
 
   private
 
   def contact_params
-    # puts "!!!!!!!!!!!!!!!!!!!!! #{params}"
     params.require(:contact).permit(:first_name, :last_name, :email)
   end
 end

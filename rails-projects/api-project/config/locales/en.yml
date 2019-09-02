@@ -45,5 +45,9 @@ en:
               invalid: "Please, enter valid email"
             first_name:
               blank: "First name can't be black"
+              too_short: "The first name must have at least %{count} characters."
+              too_long: "The first name must have no more than %{count} characters."
             last_name:
               blank: "Last name can't be black"
+              too_short: "The last name must have at least %{count} characters."
+              too_long: "The last name must have no more than %{count} characters."

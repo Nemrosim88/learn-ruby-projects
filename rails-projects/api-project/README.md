@@ -82,8 +82,8 @@ end
 
 ```ruby
 class Contact < ApplicationRecord
-  validates :first_name, presence: true, length: { minimum: 3, maximum: 50 }
-  validates :last_name, presence: true, length: { minimum: 3, maximum: 50 }
+  validates :first_name, presence: true, length: { minimum: 3, maximum: 15 }
+  validates :last_name, presence: true, length: { minimum: 3, maximum: 15 }
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 end
 ```
@@ -108,24 +108,12 @@ en:
               invalid: "Please, enter valid email"
             first_name:
               blank: "First name can't be black"
+              too_short: "The first name must have at least %{count} characters."
+              too_long: "The first name must have no more than %{count} characters."
             last_name:
               blank: "Last name can't be black"
-```
-
-### Step 8 Contact.rb changes
-> Add this line to \controllers\v1\contacts_controller.rb file
-
-```ruby
-def create
-    @contact = Contact.new(contact_params)
-
-    if @contact.save
-      render json: @contact, status: :created
-    else
-      render json: @contact.errors, status: :bad_request
-
-    end
-  end
+              too_short: "The last name must have at least %{count} characters."
+              too_long: "The last name must have no more than %{count} characters."
 ```
 
 ### Step 8
@@ -138,7 +126,7 @@ end
 ```
 
 ### Step 9
-> Add index method to contacts controller.
+> Add index method to \controllers\v1\contacts_controller.rb file.
 
 ```ruby
 class V1::ContactsController < ApplicationController
@@ -146,6 +134,7 @@ class V1::ContactsController < ApplicationController
     @contacts = Contact.all
     
     # It will return "contacts" in json format
+    # RAILS STATUS CODES http://billpatrianakos.me/blog/2013/10/13/list-of-rails-status-code-symbols/
     render json: @contacts, status: :ok
     # OR same line
     # render json: { data: @contacts, status: 200 }
