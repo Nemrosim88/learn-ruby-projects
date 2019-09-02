@@ -77,6 +77,57 @@ ActiveRecord::Schema.define(version: 2019_08_31_104724) do
 end
 ```
 
+### Step 8 VALIDATIONS
+> Add validations to "contact.rb" file
+
+```ruby
+class Contact < ApplicationRecord
+  validates :first_name, presence: true, length: { minimum: 3, maximum: 50 }
+  validates :last_name, presence: true, length: { minimum: 3, maximum: 50 }
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+end
+```
+
+### Step 8 VALIDATIONS ERROR MESSAGES
+> Add custom error messages for validations to "en.yml" file
+
+```ruby
+en:
+  activerecord:
+    attributes:
+      contact:
+        first_name: "First name"
+        last_name: "Last name"
+        email: "E-mail address"
+    errors:
+      models:
+        contact:
+          attributes:
+            email:
+              blank: "Email can't be black"
+              invalid: "Please, enter valid email"
+            first_name:
+              blank: "First name can't be black"
+            last_name:
+              blank: "Last name can't be black"
+```
+
+### Step 8 Contact.rb changes
+> Add this line to \controllers\v1\contacts_controller.rb file
+
+```ruby
+def create
+    @contact = Contact.new(contact_params)
+
+    if @contact.save
+      render json: @contact, status: :created
+    else
+      render json: @contact.errors, status: :bad_request
+
+    end
+  end
+```
+
 ### Step 8
 `$ rails g controller v1/contacts`
 > It will generate "app/controllers/v1/contacts_controller.rb" file with V1::ContactsController class in it.

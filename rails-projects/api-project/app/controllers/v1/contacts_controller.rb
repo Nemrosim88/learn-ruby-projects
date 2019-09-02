@@ -4,17 +4,21 @@ class V1::ContactsController < ApplicationController
   def index
     @contacts = Contact.all
 
-    render json: @contacts, status: :ok
+    # RAILS STATUS CODES http://billpatrianakos.me/blog/2013/10/13/list-of-rails-status-code-symbols/
+    # render json: @contacts, status: :ok
     # OR same line
-    # render json: { data: @contacts, status: 200 }
+    render json: { data: @contacts, status: 200 }
   end
 
   def create
     @contact = Contact.new(contact_params)
 
-    @contact.save
+    if @contact.save
+      render json: @contact, status: :created
+    else
+      render json: @contact.errors, status: :bad_request
 
-    render json: @contact, status: :created
+    end
   end
 
   def destroy
@@ -29,7 +33,7 @@ class V1::ContactsController < ApplicationController
   private
 
   def contact_params
-    puts "!!!!!!!!!!!!!!!!!!!!! #{params}"
+    # puts "!!!!!!!!!!!!!!!!!!!!! #{params}"
     params.require(:contact).permit(:first_name, :last_name, :email)
   end
 end

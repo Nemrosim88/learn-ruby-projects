@@ -30,4 +30,20 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      contact:
+        first_name: "First name"
+        last_name: "Last name"
+        email: "E-mail address"
+    errors:
+      models:
+        contact:
+          attributes:
+            email:
+              blank: "Email can't be black"
+              invalid: "Please, enter valid email"
+            first_name:
+              blank: "First name can't be black"
+            last_name:
+              blank: "Last name can't be black"
