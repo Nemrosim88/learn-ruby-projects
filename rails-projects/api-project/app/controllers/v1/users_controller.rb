@@ -16,6 +16,7 @@ class V1::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    puts "!!!!!!!!!!!!!! #{UserRole.find_by(id: params[:user_role])}"
     if @user.save
       render json: @user, status: :created
     else
