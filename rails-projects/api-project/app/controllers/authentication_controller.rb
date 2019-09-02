@@ -1,13 +1,20 @@
+# frozen_string_literal: true
+
 class AuthenticationController < ApplicationController
- skip_before_action :authenticate_request
+  #  before_action :authenticate_request
+  #  skip_before_action :authenticate_request
 
- def authenticate
-   command = AuthenticateUser.call(params[:email], params[:password])
+  def authenticate
+    auth = AuthenticateUser.call(params[:email], params[:password])
 
-   if command.success?
-     render json: { auth_token: command.result, user: User.find_by(email: params[:email]).as_json(except: [:password_digest, :id]) }
-   else
-     render json: { error: command.errors }, status: :unauthorized
-   end
- end
+    if auth.success?
+      user = User.find_by(email: params[:email])
+      render json: {
+        auth_token: auth.result,
+        user: user.as_json(except: %i[password_digest id role_id], include: :role)
+      }
+    else
+      render json: { error: auth.errors }, status: :unauthorized
+    end
+  end
 end

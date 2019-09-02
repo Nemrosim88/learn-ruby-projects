@@ -15,10 +15,11 @@ class V1::UsersController < ApplicationController
   end
 
   def create
+    
     @user = User.new(user_params)
-    puts "!!!!!!!!!!!!!! #{UserRole.find_by(id: params[:user_role])}"
+    @user.role = Role.find_by(id: params[:role])
     if @user.save
-      render json: @user, status: :created
+      render json: @user.as_json(except: [:password_digest]), status: :created
     else
       render json: @user.errors, status: :bad_request
     end
