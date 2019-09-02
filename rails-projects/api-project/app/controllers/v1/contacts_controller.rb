@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class V1::ContactsController < ApplicationController
+
   def index
     @contacts = Contact.all
 
@@ -12,6 +13,7 @@ class V1::ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
+    @contact.user = @current_user
     if @contact.save
       render json: @contact, status: :created
     else
