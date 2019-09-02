@@ -26,6 +26,9 @@ module ApiProject
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    # ADDED FOR JWT
+    config.autoload_paths << Rails.root.join('lib')
+
     # ADDED FOR rails_admin gem
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Flash

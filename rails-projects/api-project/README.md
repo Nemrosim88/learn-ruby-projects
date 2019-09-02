@@ -233,3 +233,62 @@ module ApiProject
     end
 ```
 
+# ADDING USERS
+
+## Step 1 Generate migration file
+`$ rails g migration create_users`
+
+`$ rails g migration add_user_id_to_contacts`
+
+## Step 2 Code modifications
+> 'contact' model
+
+```ruby
+   class Contact < ApplicationRecord
+  belongs_to :user
+  validates :user_id, presence: true
+  validates :first_name, presence: true, length: { minimum: 3, maximum: 15 }
+  validates :last_name, presence: true, length: { minimum: 3, maximum: 15 }
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+end
+```
+
+## Step 3 Code modifications
+> User model
+
+```ruby
+   class User < ApplicationRecord
+  
+  has_many :contacts
+  # Before saving convert email value to lowercase
+  before_save { self.email = email.downcase }
+
+  validates :name, presence: true, length: { minimum: 3, maximum: 25 }
+  validates :surname, presence: true, length: { minimum: 3, maximum: 15 }
+  validates :patronymic, presence: true, length: { minimum: 3, maximum: 15 }
+  validates :nickname,
+            presence: true,
+            # "joe" and "Joe" can be created.
+            # uniqueness: true,
+            # Solution:
+            uniqueness: { case_sensitive: false },
+            length: { minimum: 3, maximum: 15 }
+  validates :phone, presence: true, length: { minimum: 3, maximum: 15 }
+  # VALID_EMAIL_REGEXP = /\A.....some regexp...z\/i
+  validates :email,
+            presence: true,
+            length: { minimum: 3, maximum: 105 },
+            format: { with: URI::MailTo::EMAIL_REGEXP },
+            # You can add custom regexp
+            # format: { with: VALID_EMAIL_REGEXP },
+            uniqueness: { case_sensitive: false }
+  # Will automatically convert password to hash
+  has_secure_password
+end
+```
+
+# ADDING BCRYPT
+
+# ADDING JWT
+
+

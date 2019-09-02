@@ -60,6 +60,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.1, >= 2.1.8)
+    bcrypt (3.1.13)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.3)
@@ -81,6 +82,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    jwt (2.2.1)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.1.1)
@@ -167,6 +169,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    simple_command (0.0.9)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -191,13 +194,16 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
+  jwt
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rack-cors
   rails (~> 6.0.0)
   rails_admin (~> 2.0)
+  simple_command
   tzinfo-data
 
 RUBY VERSION
