@@ -1,4 +1,4 @@
-class AuthenticateUser
+class CreateRefreshToken
   prepend SimpleCommand
 
   def initialize(email, password)
@@ -6,8 +6,8 @@ class AuthenticateUser
     @password = password
   end
 
-  def call    
-    JsonWebToken.encode_access_token(user_id: user.id) if user
+  def call
+    JsonWebToken.encode_refresh_token(user_id: user.id) if user
   end
 
   private

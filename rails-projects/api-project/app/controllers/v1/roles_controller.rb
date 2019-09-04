@@ -2,7 +2,7 @@
 
 class V1::RolesController < ApplicationController
 
-  before_action :authenticate_request, except: [:create]
+  # before_action :authenticate_request, except: [:create]
   before_action :find_role, only: %i[show update destroy]
 
   def index
