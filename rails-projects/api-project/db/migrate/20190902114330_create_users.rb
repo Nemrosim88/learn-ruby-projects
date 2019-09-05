@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CreateUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :users do |t|
-      t.integer :role_id, default: 0
+      t.foreign_key :role_id
       t.string :name
       t.string :surname
       t.string :patronymic
