@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_103800) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "role_id", default: 0
+    t.integer "role_id"
     t.string "name"
     t.string "surname"
     t.string "patronymic"
