@@ -3,6 +3,8 @@
 require 'rails_helper'
 require 'json'
 
+# http://timjwade.com/2016/08/01/testing-json-apis-with-rspec-composable-matchers.html
+# https://relishapp.com/rspec/rspec-expectations/v/3-8/docs
 RSpec.describe V1::RolesController do
   describe 'GET #index' do
     let!(:roles) { FactoryBot.create_list(:random_roles, 3) }
